@@ -36,7 +36,7 @@ private static $secret_key; // Clave secreta para firmar el token
         }
     }
 
-     public static function handle() {
+    public static function handle() {
         // Obtener el token del encabezado authorization
         $headers = apache_request_headers();
         $authHeader = $headers['Authorization'] ?? '';
@@ -68,6 +68,30 @@ private static $secret_key; // Clave secreta para firmar el token
 
         // Guardar datos del token para uso posterior
         $GLOBALS['user_id'] = $tokenData['user_id'];
+    }
+
+    static public function apiHandle() {
+        // Definir la ruta base para los controladores
+        $basePath = __DIR__ . '/../controllers/';
+
+        // Obtener la ruta de la API desde la URL, por ejemplo: /api/authController
+        $requestUri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        $segments = explode('/', $requestUri);
+
+        // Asumimos que la URL de la API es algo como /api/auth o /api/users
+        // Podrías tener una estructura de carpetas: /controllers/auth.php
+        $controllerName = end($segments);
+        $controllerFile = $basePath . $controllerName . '.php';
+
+        // Verificar si el archivo del controlador existe
+        if (file_exists($controllerFile)) {
+            // Incluir y ejecutar el controlador
+            require_once $controllerFile;
+        } else {
+            // Si el controlador no existe, retornar un error 404
+            http_response_code(404);
+            echo json_encode(['success' => false, 'message' => 'Ruta de API no encontrada.']);
+        }
     }
 
 	static public function mdwRouter(){ ?>
@@ -118,7 +142,15 @@ private static $secret_key; // Clave secreta para firmar el token
 
         <?php else : ?>
 
-            <?php include "views/auth/login.html"; ?>
+            <?php if (isset($_GET["ruta"]) && $_GET["ruta"] == "register") : ?>
+
+                <?php include "views/auth/register.html"; ?>
+
+            <?php else : ?>
+
+                <?php include "views/auth/login.html"; ?>
+                
+            <?php endif; ?>
 
         <?php endif; ?>
 
