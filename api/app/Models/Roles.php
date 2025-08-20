@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
 
-class Usuarios extends Model
+class Roles extends Model
 {
-    protected $table = 'usuarios';
+    protected $table = 'roles';
     protected $primaryKey = 'id';
 
     public $timestamps = true;
@@ -16,14 +15,8 @@ class Usuarios extends Model
     const UPDATED_AT = 'fecha_actualizacion';
 
     protected $fillable = [
-        'id_rol',
-        'nombres',
-        'apellidos',
-        'edad',
-        'ci',
-        'username',
-        'password',
-        'ultimo_inicio',
+        'rol',
+        'descripcion',
     ];
 }
 

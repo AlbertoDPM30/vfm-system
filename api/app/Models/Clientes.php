@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
 
-class Usuarios extends Model
+class Clientes extends Model
 {
-    protected $table = 'usuarios';
+    protected $table = 'clientes';
     protected $primaryKey = 'id';
 
     public $timestamps = true;
@@ -21,9 +20,6 @@ class Usuarios extends Model
         'apellidos',
         'edad',
         'ci',
-        'username',
-        'password',
-        'ultimo_inicio',
     ];
 }
 
