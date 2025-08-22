@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Usuarios extends Model
+class Usuarios extends Authenticatable
 {
+
+    use HasApiTokens;
+
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
 
@@ -24,6 +28,10 @@ class Usuarios extends Model
         'username',
         'password',
         'ultimo_inicio',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 }
 

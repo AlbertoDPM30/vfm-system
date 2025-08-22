@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\UsuarioController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RolesController;
 use App\Http\Controllers\Api\ClientesController;
 
@@ -15,11 +16,22 @@ Route::get('/ping', function () {
 // Ruta para probar conexión a la base de datos
 Route::get('/conexion', [Controller::class, 'pruebaConexion']);
 
-// Rutas RESTful para usuarios
-Route::apiResource('usuarios', UsuarioController::class);
+// Rutas RESTful para autenticarse 
+Route::post('/login', [AuthController::class, 'login']);
 
-// Rutas RESTful para roles
-Route::apiResource('roles', RolesController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    
+    // Rutas RESTful para usuarios
+    Route::apiResource('usuarios', UsuarioController::class);
 
-// Rutas RESTful para clientes
-Route::apiResource('clientes', ClientesController::class);
+    // Rutas RESTful para roles
+    Route::apiResource('roles', RolesController::class);
+
+    // Rutas RESTful para clientes
+    Route::apiResource('clientes', ClientesController::class);
+
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+});
