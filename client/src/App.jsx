@@ -1,14 +1,25 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import "./App.css";
-import { Login } from "./pages";
+import { Routes, Route } from "react-router-dom";
+import { Login, Dashboard } from "./pages";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
   return (
-    <>
-      <Login />
-    </>
+    <Routes>
+      {/* RUTAS PÚBLICAS */}
+      <Route path="/login" element={<Login />} />
+
+      {/* RUTAS PROTEGIDAS */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      {/* Agrega otras rutas protegidas o públicas aquí */}
+    </Routes>
   );
 }
 

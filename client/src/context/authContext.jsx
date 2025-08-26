@@ -1,4 +1,3 @@
-// src/context/AuthContext.jsx
 import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 
@@ -7,7 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [user, setUser] = useState(null);
-  const URL = "http://127.0.0.1:8000";
+  const URL = "http://127.0.0.1:8000/api";
 
   useEffect(() => {
     // Si hay un token en el almacenamiento local, verifica su validez
@@ -45,7 +44,7 @@ export const AuthProvider = ({ children }) => {
       const userResponse = await axios.get(`${URL}/usuarios`);
       setUser(userResponse.data);
     } catch (error) {
-      console.error("Error al iniciar sesión", error);
+      console.error("Error al iniciar sesión", error.response.data.message);
       throw error;
     }
   };
