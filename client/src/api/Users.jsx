@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const Users = () => {
   const [userId, setUserId] = useState(null);
+  const URL = "http://127.0.0.1:8000/api";
 
   const getUsers = async ({ id }) => {
     try {
