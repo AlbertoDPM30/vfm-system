@@ -10,5 +10,10 @@ export const ProtectedRoute = ({ children }) => {
   }
 
   // Si el usuario está autenticado, renderiza la ruta.
-  return children;
+  return (
+    <>
+      {/* <Header /> */}
+      {children}
+    </>
+  );
 };

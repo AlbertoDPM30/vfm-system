@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Login, Dashboard } from "./pages";
+import { ProtectedLayout } from "./components";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
@@ -10,12 +11,13 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       {/* RUTAS PROTEGIDAS */}
+
       <Route
         path="/"
         element={
-          <ProtectedRoute>
+          <ProtectedLayout>
             <Dashboard />
-          </ProtectedRoute>
+          </ProtectedLayout>
         }
       />
       {/* Agrega otras rutas protegidas o públicas aquí */}
