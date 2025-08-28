@@ -2,7 +2,6 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Login, Dashboard } from "./pages";
 import { ProtectedLayout } from "./components";
-import { ProtectedRoute } from "./ProtectedRoute";
 
 function App() {
   return (

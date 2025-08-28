@@ -1,19 +1,20 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "./context/authContext";
+import { useAuth } from "./context/AuthContext";
+import { Loading } from "./components";
 
 export const ProtectedRoute = ({ children }) => {
-  const { token, user } = useAuth();
+  const { token, loading } = useAuth();
 
-  // Si no hay un token (el usuario no está logueado), redirige a la página de login.
-  if (!token || !user) {
+  // Si aún está cargando, no renderizamos nada
+  if (loading) {
+    return <Loading />;
+  }
+
+  // Si ya no está cargando y no hay un token, redirigimos al login
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 
-  // Si el usuario está autenticado, renderiza la ruta.
-  return (
-    <>
-      {/* <Header /> */}
-      {children}
-    </>
-  );
+  // Si está autenticado, mostramos el componente hijo
+  return children;
 };

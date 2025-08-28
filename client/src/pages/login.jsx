@@ -1,23 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
+import { Loading } from "../components";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState("hidden");
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading("block");
       if (username == "" || password == "") {
-        return;
+        return setIsLoading("hidden");
       }
       await login({ username, password });
-      navigate("/"); // Redirige al dashboard después del login
+      navigate("/");
     } catch (error) {
+      setIsLoading("hidden");
       setErrorMessage(error.response.data.message);
     }
   };
@@ -53,6 +57,10 @@ const LoginPage = () => {
           }`}
         >
           {errorMessage}
+        </div>
+
+        <div className={isLoading}>
+          <Loading />
         </div>
       </form>
     </div>

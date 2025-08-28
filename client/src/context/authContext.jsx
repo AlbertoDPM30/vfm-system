@@ -6,26 +6,29 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [user, setUser] = useState(null);
-  const URL = "http://127.0.0.1:8000/api";
+  const [loading, setLoading] = useState(true);
+  const URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // Si hay un token en el almacenamiento local, verifica su validez
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      axios
-        .get(`${URL}/usuarios`)
-        .then((response) => {
+    const checkToken = async () => {
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        try {
+          const response = await axios.get(`${URL}/usuarios`);
           setUser(response.data);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error("El token expiró o es inválido", error);
-          // Si el token es inválido, lo eliminamos y limpiamos el estado.
           setToken(null);
           setUser(null);
           localStorage.removeItem("token");
-        });
-    }
-  }, [token]);
+          delete axios.defaults.headers.common["Authorization"];
+        }
+      }
+      setLoading(false); // La verificación ha terminado
+    };
+
+    checkToken();
+  }, [token, URL]);
 
   const login = async (credentials) => {
     try {
@@ -60,6 +63,7 @@ export const AuthProvider = ({ children }) => {
   const authData = {
     token,
     user,
+    loading,
     login,
     logout,
   };
