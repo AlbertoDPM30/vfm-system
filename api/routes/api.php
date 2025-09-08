@@ -19,11 +19,11 @@ Route::get('/conexion', [Controller::class, 'pruebaConexion']);
 // Rutas RESTful para autenticarse 
 Route::post('/login', [AuthController::class, 'login']);
 
+// Rutas RESTful para usuarios
+Route::apiResource('usuarios', UsuarioController::class);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    
-    // Rutas RESTful para usuarios
-    Route::apiResource('usuarios', UsuarioController::class);
 
     // Rutas RESTful para roles
     Route::apiResource('roles', RolesController::class);

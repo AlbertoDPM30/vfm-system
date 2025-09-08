@@ -3,13 +3,13 @@ import axios from "axios";
 
 export const Users = () => {
   const [userId, setUserId] = useState(null);
-  const URL = "http://127.0.0.1:8000/api";
+  const URL = import.meta.env.VITE_API_URL;
 
   const getUsers = async ({ id }) => {
     try {
       id ? setUserId(id) : setUserId(null);
       const endpoint = userId ? `/usuarios/id=${userId}` : "/usuarios";
-      const response = await axios.post(`${URL}${endpoint}`);
+      const response = await axios.get(`${URL}${endpoint}`);
       return response.data;
     } catch (error) {
       console.error("Error al obtener usuario", error.response.data.message);
@@ -17,5 +17,19 @@ export const Users = () => {
     }
   };
 
-  return { getUsers };
+  const addUser = async ({ data }) => {
+    try {
+      const dataUsuario = data;
+      const endpoint = "/usuarios";
+      const response = await axios.post(`${URL}${endpoint}`, {
+        dataUsuario,
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error al obtener usuario", error.response.data.message);
+      throw error.response.data;
+    }
+  };
+
+  return { getUsers, addUser };
 };

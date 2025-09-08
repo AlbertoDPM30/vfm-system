@@ -29,7 +29,7 @@ export default function Dashboard() {
         <span className="text-sky-700">Bienvenid@, </span>
         {loggedUser.nombres} {loggedUser.apellidos}
       </h2>
-      {/* <section className="w-full py-7 px-9 flex flex-row gap-5"> */}
+
       <section className="w-full py-7 px-9 grid grid-cols-4 gap-5">
         {itemCards.map((item) => (
           <CardItem

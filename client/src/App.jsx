@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login, Dashboard } from "./pages";
+import { Login, Register, Dashboard, Home } from "./pages";
 import { ProtectedLayout } from "./components";
 
 function App() {
@@ -8,11 +8,13 @@ function App() {
     <Routes>
       {/* RUTAS PÚBLICAS */}
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/" element={<Home />} />
 
       {/* RUTAS PROTEGIDAS */}
 
       <Route
-        path="/"
+        path="/dashboard"
         element={
           <ProtectedLayout>
             <Dashboard />

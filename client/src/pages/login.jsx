@@ -19,7 +19,7 @@ const LoginPage = () => {
         return setIsLoading("hidden");
       }
       await login({ username, password });
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setIsLoading("hidden");
       setErrorMessage(error.response.data.message);
@@ -33,6 +33,7 @@ const LoginPage = () => {
         className="flex flex-col gap-3 justify-center items-center p-5 border-2 rounded-3xl border-slate-400"
       >
         <h1 className="font-bold mb-3">VFM SYSTEM</h1>
+        <h3 className="text-2xl font-semibold mb-3">Iniciar Sesión</h3>
         <input
           className="p-2.5 border-2 border-slate-500 rounded-2xl"
           type="text"
@@ -42,7 +43,7 @@ const LoginPage = () => {
           required
         />
         <input
-          className="p-2.5 border-2 border-slate-500 rounded-2xl"
+          className="p-2.5 border-2 border-slate-500 rounded-2xl mb-3"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -50,6 +51,11 @@ const LoginPage = () => {
           required
         />
         <button type="submit">Iniciar Sesión</button>
+
+        <a className="mb-2" href="/register">
+          ¿Aún NO tienes una cuenta?
+        </a>
+        <a href="/">Volver al inicio</a>
 
         <div
           className={`bg-red-400 text-gray-950 font-semibold border-2 border-red-900 rounded-2xl px-2.5 py-2 ${

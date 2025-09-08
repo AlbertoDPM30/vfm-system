@@ -9,7 +9,7 @@ export const Header = ({ onToggleShowMenu }) => {
     e.preventDefault();
     try {
       await logout();
-      navigate("/login"); // Redirige al dashboard después del login
+      navigate("/");
     } catch (error) {
       console.log(error.response.data.message);
     }
