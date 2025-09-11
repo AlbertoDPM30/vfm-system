@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login, Register, Dashboard, Home } from "./pages";
+import { Login, Register, Dashboard, Home, Services } from "./pages";
 import { ProtectedLayout } from "./components";
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       {/* RUTAS PÚBLICAS */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/services" element={<Services />} />
       <Route path="/" element={<Home />} />
 
       {/* RUTAS PROTEGIDAS */}

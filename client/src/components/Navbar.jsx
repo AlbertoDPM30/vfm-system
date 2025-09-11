@@ -15,7 +15,7 @@ export function Navbar() {
       <a href="/">
         <h2 className="text-4xl text-shadow-md font-bold">VehiForza Motors</h2>
       </a>
-      <ul className="flex gap-3">
+      <ul className="flex gap-5">
         <li>
           <a href="/services">Servicios</a>
         </li>

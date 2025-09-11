@@ -17,16 +17,15 @@ export const Users = () => {
     }
   };
 
-  const addUser = async ({ data }) => {
+  const addUser = async (data) => {
     try {
-      const dataUsuario = data;
+      // const dataUsuario = data;
+      console.log(data);
       const endpoint = "/usuarios";
-      const response = await axios.post(`${URL}${endpoint}`, {
-        dataUsuario,
-      });
+      const response = await axios.post(`${URL}${endpoint}`, data);
       return response.data;
     } catch (error) {
-      console.error("Error al obtener usuario", error.response.data.message);
+      console.error("Error al obtener usuario", error);
       throw error.response.data;
     }
   };

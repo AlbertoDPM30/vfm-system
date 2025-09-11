@@ -38,7 +38,16 @@ const RegisterPage = () => {
         username: username,
         password: password,
       };
-      await addUser({ dataUsuario });
+      console.log(dataUsuario);
+      await addUser({
+        id_rol: 2,
+        nombres: nombres,
+        apellidos: apellidos,
+        edad: edad,
+        ci: ci,
+        username: username,
+        password: password,
+      });
       navigate("/login");
     } catch (error) {
       setIsLoading("hidden");

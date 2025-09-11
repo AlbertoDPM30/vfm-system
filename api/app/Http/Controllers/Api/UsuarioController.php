@@ -24,6 +24,10 @@ class UsuarioController extends Controller
         $usuario = Usuarios::find($id);
 
         if (!$usuario) {
+            $usuario = Usuarios::where('id', $id)->first();
+        }
+
+        if (!$usuario) {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
 

@@ -6,7 +6,9 @@ import ClientIcon from "../../public/icons/client.svg";
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const loggedUser = user[0];
+  const loggedUser = user;
+
+  console.log(loggedUser);
 
   const itemCards = [
     {
@@ -31,9 +33,9 @@ export default function Dashboard() {
       </h2>
 
       <section className="w-full py-7 px-9 grid grid-cols-4 gap-5">
-        {itemCards.map((item) => (
+        {itemCards.map((item, i) => (
           <CardItem
-            key={item.id}
+            key={i}
             route={item.route}
             icon={item.icon}
             name={item.name}

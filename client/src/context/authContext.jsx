@@ -35,19 +35,19 @@ export const AuthProvider = ({ children }) => {
       // Envía las credenciales a tu endpoint de login en Laravel
       const response = await axios.post(`${URL}/login`, credentials);
       const { token } = response.data;
+      const { usuarios } = response.data;
 
       // Almacena el token en el estado y en el almacenamiento local
       setToken(token);
+      setUser(usuarios);
       localStorage.setItem("token", token);
 
       // Configura el token para todas las futuras peticiones
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-      // Opcional: Obtener los datos del usuario y guardarlos
-      const userResponse = await axios.get(`${URL}/usuarios`);
-      setUser(userResponse.data);
+      console.log(user);
     } catch (error) {
-      console.error("Error al iniciar sesión", error.response.data.message);
+      console.error("Error al iniciar sesión", error.response.data);
       throw error;
     }
   };

@@ -20,15 +20,16 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Agregar fecha_actualizacion
-        $validated['fecha_actualizacion'] = Carbon::now();
-
         if (!Auth::attempt($request->only('username', 'password'))) {
             return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
 
         $usuario = Usuarios::where('username', $request->username)->firstOrFail();
         $token = $usuario->createToken('auth_token')->plainTextToken;
+
+        // Agregar fecha_actualizacion
+        $usuario->fecha_actualizacion = Carbon::now();
+        $usuario->save();
 
         return response()->json(['token' => $token, 'usuarios' => $usuario]);
     }

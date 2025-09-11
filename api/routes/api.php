@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rutas RESTful para clientes
     Route::apiResource('clientes', ClientesController::class);
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    // Route::get('/user', function (Request $request) {
+    //     return $request->user();
+    // });
 });
