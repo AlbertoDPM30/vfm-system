@@ -49,7 +49,7 @@ export default function Home() {
         {/* TIPOS DE CLIENTES */}
         <section className="w-full flex flex-wrap">
           <Link
-            to="faq"
+            to="contact-us"
             className="flex flex-col md:w-[50%] w-full justify-center items-center gap-4 bg-zinc-900 hover:bg-radial hover:from-zinc-900 hover:to-zinc-800/25 to-75% text-center p-20"
           >
             <img src={CarKey} alt="Propietario" className="max-w-[10rem]" />
@@ -59,7 +59,7 @@ export default function Home() {
             </span>
           </Link>
           <Link
-            to="faq"
+            to="contact-us"
             className="flex flex-col md:w-[50%] w-full justify-center items-center gap-4 bg-zinc-900 hover:bg-radial hover:from-zinc-900 hover:to-zinc-800/25 to-75% text-center p-20"
           >
             <img src={CarBuyer} alt="Propietario" className="max-w-[10rem]" />

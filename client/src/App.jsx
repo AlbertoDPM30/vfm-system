@@ -1,6 +1,15 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login, Register, Dashboard, Home, Services } from "./pages";
+import {
+  Login,
+  Register,
+  Dashboard,
+  Home,
+  Services,
+  NotFound,
+  AboutUs,
+  ContactUs,
+} from "./pages";
 import { ProtectedLayout } from "./components";
 
 function App() {
@@ -10,6 +19,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/contact-us" element={<ContactUs />} />
       <Route path="/" element={<Home />} />
 
       {/* RUTAS PROTEGIDAS */}
@@ -22,7 +33,8 @@ function App() {
           </ProtectedLayout>
         }
       />
-      {/* Agrega otras rutas protegidas o públicas aquí */}
+      {/* RUTA 404 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -15,7 +15,7 @@ export function Footer() {
             <a href="/">Camiones</a>
           </li>
           <li>
-            <a href="/">Bicicletas</a>
+            <a href="/">Otros vehiculos</a>
           </li>
         </ul>
 
